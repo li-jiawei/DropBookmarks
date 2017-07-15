@@ -1,2 +1,10 @@
 # password
 password: p@ssw0rd
+
+# change http port
+server:
+  applicationConnectors:
+    # dash used to list items
+    - type: http
+      port: 8085
+
