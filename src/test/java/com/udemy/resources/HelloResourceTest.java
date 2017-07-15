@@ -9,6 +9,8 @@ import io.dropwizard.auth.basic.BasicAuthFactory;
 import io.dropwizard.auth.basic.BasicCredentials;
 import io.dropwizard.testing.junit.ResourceTestRule;
 import org.glassfish.jersey.client.authentication.HttpAuthenticationFeature;
+import org.glassfish.jersey.test.grizzly.GrizzlyTestContainerFactory;
+import org.glassfish.jersey.test.grizzly.GrizzlyWebTestContainerFactory;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Ignore;
@@ -23,7 +25,7 @@ import static org.junit.Assert.*;
  */
 public class HelloResourceTest {
     private static final HttpAuthenticationFeature FEATURE
-            = HttpAuthenticationFeature.basic("user", "p");
+            = HttpAuthenticationFeature.basic("user", "p@ssw0rd");
     private static final Authenticator<BasicCredentials, User> AUTHENTICATOR
             = new Authenticator<BasicCredentials, User>() {
         @Override
@@ -40,6 +42,7 @@ public class HelloResourceTest {
                     "realm",
                     User.class
             )))
+            .setTestContainerFactory(new GrizzlyWebTestContainerFactory())
             .addResource(new HelloResource())
             .build();
 
