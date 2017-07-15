@@ -21,6 +21,8 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <dropwizard.version>0.8.2</dropwizard.version>
         <mainClass>com.udemy.DropBookmarksApplication</mainClass>
+
+        <jersey.version>2.19</jersey.version>
     </properties>
 
     <dependencies>
@@ -38,6 +40,23 @@
             <groupId>io.dropwizard</groupId>
             <artifactId>dropwizard-auth</artifactId>
             <version>${dropwizard.version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.glassfish.jersey.test-framework.providers/jersey-test-framework-provider-grizzly2 -->
+        <dependency>
+            <groupId>org.glassfish.jersey.test-framework.providers</groupId>
+            <artifactId>jersey-test-framework-provider-grizzly2</artifactId>
+            <version>${jersey.version}</version>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>junit</groupId>
+                    <artifactId>junit</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>javax.servlet</groupId>
+                    <artifactId>javax.servlee.api</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
 
