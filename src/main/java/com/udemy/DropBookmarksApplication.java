@@ -2,12 +2,16 @@ package com.udemy;
 
 import com.udemy.auth.HelloAuthenticator;
 import com.udemy.core.User;
+import com.udemy.resources.ContactResource;
 import com.udemy.resources.HelloResource;
 import io.dropwizard.Application;
 import io.dropwizard.auth.AuthFactory;
 import io.dropwizard.auth.basic.BasicAuthFactory;
+import io.dropwizard.jdbi.DBIFactory;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import org.glassfish.jersey.media.multipart.MultiPartFeature;
+import org.skife.jdbi.v2.DBI;
 
 public class DropBookmarksApplication extends Application<DropBookmarksConfiguration> {
 
@@ -31,6 +35,9 @@ public class DropBookmarksApplication extends Application<DropBookmarksConfigura
         environment.jersey().register(
                 new HelloResource()
         );
+
+        environment.jersey().register(MultiPartFeature.class);
+
         environment.jersey().register(
                 AuthFactory.binder(
                         new BasicAuthFactory<>(
@@ -40,6 +47,8 @@ public class DropBookmarksApplication extends Application<DropBookmarksConfigura
                         )
                 )
         );
+
+        environment.jersey().register(new ContactResource());
     }
 
 }
